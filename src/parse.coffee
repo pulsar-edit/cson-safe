@@ -31,6 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ###
 
 {nodes} = require 'coffee-script'
+vm = require 'vm'
 
 defaultReviver = (key, value) -> value
 
@@ -69,7 +70,7 @@ parse = (source, reviver = defaultReviver) ->
       {value} = node
       try
         if value[0] == "'"
-          eval value # we trust the lexer here
+          vm.runInThisContext value # we trust the lexer here
         else
           JSON.parse value
       catch err
@@ -138,7 +139,7 @@ parse = (source, reviver = defaultReviver) ->
       when 'Value'
         {value} = csNode.base
         switch value[0]
-          when '\'' then eval value # we trust the lexer here
+          when '\'' then vm.runInThisContext value # we trust the lexer here
           when '"' then JSON.parse value
           else value
 

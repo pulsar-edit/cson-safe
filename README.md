@@ -1,3 +1,5 @@
+# This Repo is archived under Pulsar-Edit since it is not used.
+
 # cson-safe
 
 An alternative to [cson](https://github.com/bevry/cson).
